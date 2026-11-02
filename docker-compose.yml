@@ -1,0 +1,21 @@
+services:
+  bot:
+    build: .
+    image: cryptocurrency-bot:local
+    env_file:
+      - .env
+    environment:
+      BROADCAST_STATE_PATH: /app/data/broadcast_settings.json
+    volumes:
+      - bot_data:/app/data
+    restart: unless-stopped
+    init: true
+    stop_grace_period: 30s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  bot_data:

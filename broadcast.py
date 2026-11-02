@@ -1,11 +1,12 @@
 import asyncio
 import json
 import logging
+import os
 from pathlib import Path
 
 from config import validate_interval
 
-STATE_PATH = Path(__file__).with_name("broadcast_settings.json")
+STATE_PATH = Path(os.getenv("BROADCAST_STATE_PATH") or Path(__file__).with_name("broadcast_settings.json"))
 
 
 class BroadcastSettings:
